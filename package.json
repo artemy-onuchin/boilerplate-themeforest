@@ -1,0 +1,21 @@
+{
+  "name": "template-themeforest",
+  "version": "0.1.0",
+  "description": "Boilerplate code for create html theme for marketplace",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemiyonuchin/boilerplate-themeforest.git"
+  },
+  "keywords": [
+    "themeforest",
+    "html",
+    "template"
+  ],
+  "author": "Onuchin Artemiy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artemiyonuchin/boilerplate-themeforest/issues"
+  },
+  "homepage": "https://github.com/artemiyonuchin/boilerplate-themeforest#readme"
+}
