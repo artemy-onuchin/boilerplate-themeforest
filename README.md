@@ -2,6 +2,11 @@
 
 Boilerplate code for create html theme for marketplace
 
+`__dev` - it's a source folder
+`demo` - it's a folder for your demo
+`build` - it's a result of your work
+`index.pug` - it's a first page in demo
+
 ## Dependencies
 
 - [`gulp`](https://gulpjs.com/) - Gulp is a toolkit for automating painful or time-consuming tasks in your development.

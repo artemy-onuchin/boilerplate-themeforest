@@ -1,0 +1,7 @@
+﻿# Folder
+/node_modules/
+/public/
+/demo/
+
+# Files
+package-lock.json

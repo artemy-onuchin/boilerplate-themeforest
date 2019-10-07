@@ -1,0 +1,29 @@
+doctype html
+html
+
+    include blocks/head.pug
+    include blocks/mixins.pug
+
+    body
+
+        // START HEADER
+        include blocks/header.pug
+        // END HEADER
+        |
+        |
+        // START CONTENT
+        section
+            include blocks/aside.pug
+
+            main
+                p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus eligendi itaque aspernatur eaque harum dicta totam nam labore, sit laudantium voluptatibus, reiciendis dignissimos accusantium a eos voluptates culpa tempora omnis!
+        // END CONTENT
+        |
+        |
+        // START FOOTER
+        include blocks/footer.pug
+        // END FOOTER
+        |
+        |
+        // JS
+        include blocks/scripts.pug
