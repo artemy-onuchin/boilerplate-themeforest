@@ -1,0 +1,12 @@
+// general rules
+@import './vars';
+@import './theme_rules/colors';
+@import './mixin';
+
+// layout rules
+@import './layout_rules/body';
+@import './layout_rules/header';
+@import './layout_rules/navigation';
+@import './layout_rules/content';
+@import './layout_rules/aside';
+@import './layout_rules/footer';
