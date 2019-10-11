@@ -78,7 +78,7 @@ gulp.task('css-build', function styleDemo() {
 
 
 // JavaScript
-gulp.task('demo-js', function styleDemo() {
+gulp.task('demo-js', function () {
     return gulp.src([
             'node_modules/jquery/dist/jquery.min.js',
             '__dev/js/console.js',
@@ -92,7 +92,7 @@ gulp.task('demo-js', function styleDemo() {
     .pipe(livereload({ start: true }));
 });
 
-gulp.task('js-vendor', function styleDemo() {
+gulp.task('js-vendor', function () {
     return gulp.src([
             'node_modules/jquery/dist/jquery.min.js',
             '__dev/js/console.js',
@@ -106,7 +106,7 @@ gulp.task('js-vendor', function styleDemo() {
     .pipe(livereload({ start: true }));
 });
 
-gulp.task('js-minify', function styleDemo() {
+gulp.task('js-minify', function () {
     return gulp.src([
             '__dev/js/console.js',
             '__dev/js/common.js'
@@ -119,7 +119,7 @@ gulp.task('js-minify', function styleDemo() {
     .pipe(livereload({ start: true }));
 });
 
-gulp.task('js', function styleDemo() {
+gulp.task('js', function () {
     return gulp.src([
             '__dev/js/console.js',
             '__dev/js/common.js'
