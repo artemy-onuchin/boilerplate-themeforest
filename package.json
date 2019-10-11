@@ -19,15 +19,20 @@
   },
   "homepage": "https://github.com/artemiyonuchin/boilerplate-themeforest#readme",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0-beta.2",
     "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
     "gulp-concat-css": "^3.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-livereload": "^4.0.2",
     "gulp-plumber": "^1.2.1",
     "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.0.2"
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
   },
   "browserslist": [
     "last 5 version",
@@ -35,5 +40,8 @@
     "ios_saf >= 9",
     "Firefox ESR",
     "> 1%"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
 }

@@ -8,6 +8,9 @@ let gulp = require('gulp'),
     gcmq = require('gulp-group-css-media-queries'),
     cleanCSS = require('gulp-clean-css'),
     pug = require('gulp-pug'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    babel = require('gulp-babel'),
     plumber = require('gulp-plumber'),
     livereload = require('gulp-livereload');
 
@@ -73,8 +76,64 @@ gulp.task('css-build', function styleDemo() {
     .pipe(gulp.dest('public/assets/css'))
 });
 
+
+// JavaScript
+gulp.task('demo-js', function styleDemo() {
+    return gulp.src([
+            'node_modules/jquery/dist/jquery.min.js',
+            '__dev/js/console.js',
+            '__dev/js/common.js'
+        ])
+    .pipe(plumber())
+    .pipe(babel())
+    .pipe(concat('demo.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('demo/assets/js'))
+    .pipe(livereload({ start: true }));
+});
+
+gulp.task('js-vendor', function styleDemo() {
+    return gulp.src([
+            'node_modules/jquery/dist/jquery.min.js',
+            '__dev/js/console.js',
+            '__dev/js/common.js'
+        ])
+    .pipe(plumber())
+    .pipe(babel())
+    .pipe(concat('vendor.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/assets/js'))
+    .pipe(livereload({ start: true }));
+});
+
+gulp.task('js-minify', function styleDemo() {
+    return gulp.src([
+            '__dev/js/console.js',
+            '__dev/js/common.js'
+        ])
+    .pipe(plumber())
+    .pipe(babel())
+    .pipe(concat('script.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/assets/js'))
+    .pipe(livereload({ start: true }));
+});
+
+gulp.task('js', function styleDemo() {
+    return gulp.src([
+            '__dev/js/console.js',
+            '__dev/js/common.js'
+        ])
+    .pipe(plumber())
+    .pipe(babel())
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest('public/assets/js'))
+    .pipe(livereload({ start: true }));
+});
+
+
 // Build
-gulp.task('build', gulp.series('html-build','css-build'));
+gulp.task('build', gulp.series('html-build','css-build', 'js-vendor', 'js-minify', 'js'));
 
 
 // Default
@@ -84,4 +143,6 @@ gulp.task('default', function () {
     gulp.watch('__dev/templates/**/*.pug', gulp.series('html-demo'));
 
     gulp.watch('__dev/scss/**/*.scss', gulp.series('demo-style'));
+
+    gulp.watch('__dev/js/**/*.js', gulp.series('demo-js'));
 });
