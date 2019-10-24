@@ -1,0 +1,29 @@
+- var pageTitle = 'Welcome to our site!'
+
+doctype html
+html
+
+    include ../blocks/head-demo.pug
+    include ../blocks/mixins.pug
+
+    body
+
+        // START HEADER
+        include ../layouts/header.pug
+        // END HEADER
+        |
+        |
+        // START HOME PAGE
+        main
+            //- here list to your demo page
+            p It's a HOME №1 page
+        // END HOME PAGE
+        |
+        |
+        // START FOOTER
+        include ../layouts/footer.pug
+        // END FOOTER
+        |
+        |
+        // JS
+        include ../blocks/scripts-demo.pug

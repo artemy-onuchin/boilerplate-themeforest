@@ -1,26 +1,29 @@
+- var pageTitle = 'Demo page'
+
 doctype html
 html
 
-    include demo/demo-head.pug
-    include demo/demo-mixins.pug
+    include blocks/head-demo.pug
+    include blocks/mixins.pug
 
     body
 
         // START HEADER
-        include demo/demo-header.pug
+        include layouts/header.pug
         // END HEADER
         |
         |
         // START DEMO INDEX PAGE
         main
             //- here list to your demo page
+            p It's a demo page
         // END DEMO INDEX PAGE
         |
         |
         // START FOOTER
-        include demo/demo-footer.pug
+        include layouts/footer.pug
         // END FOOTER
         |
         |
         // JS
-        include demo/demo-scripts.pug
+        include blocks/scripts-demo.pug
