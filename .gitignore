@@ -5,3 +5,4 @@
 
 # Files
 package-lock.json
+*.ini
