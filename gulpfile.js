@@ -19,8 +19,8 @@ let gulp = require('gulp'),
 // Templates (HTML) -------------------------------------------------------------------------------
 gulp.task('html-demo', function buildHTML() {
     return gulp.src([
-        '__dev/templates/*.pug',
-        '__dev/templates/pages/*.pug'
+        'src/templates/*.pug',
+        'src/templates/pages/*.pug'
     ])
     .pipe(plumber())
     .pipe(pug())
@@ -29,7 +29,7 @@ gulp.task('html-demo', function buildHTML() {
 });
 
 gulp.task('html-prod', function buildHTML() {
-    return gulp.src('__dev/templates/pages/*.pug')
+    return gulp.src('src/templates/pages/*.pug')
     .pipe(plumber())
     .pipe(replace('include ../blocks/head-demo.pug','include ../blocks/head-prod.pug'))
     .pipe(replace('include ../blocks/scripts-demo.pug','include ../blocks/scripts-prod.pug'))
@@ -43,14 +43,14 @@ gulp.task('html-prod', function buildHTML() {
 // Style ------------------------------------------------------------------------------------------
 gulp.task('style-demo', function styleDemo() {
     return gulp.src([
-        '__dev/scss/normalize.scss',
-        '__dev/scss/fonts.scss',
-        '__dev/scss/base.scss',
-        '__dev/scss/typography.scss',
-        '__dev/scss/layouts.scss',
-        '__dev/scss/modules.scss',
-        '__dev/scss/pages.scss',
-        '__dev/scss/demo.scss'
+        'src/scss/normalize.scss',
+        'src/scss/fonts.scss',
+        'src/scss/base.scss',
+        'src/scss/typography.scss',
+        'src/scss/layouts.scss',
+        'src/scss/modules.scss',
+        'src/scss/pages.scss',
+        'src/scss/demo.scss'
     ])
     .pipe(plumber())
     .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
@@ -64,13 +64,13 @@ gulp.task('style-demo', function styleDemo() {
 
 gulp.task('style-prod', function styleDemo() {
     return gulp.src([
-        '__dev/scss/normalize.scss',
-        '__dev/scss/fonts.scss',
-        '__dev/scss/base.scss',
-        '__dev/scss/typography.scss',
-        '__dev/scss/layouts.scss',
-        '__dev/scss/modules.scss',
-        '__dev/scss/pages.scss'
+        'src/scss/normalize.scss',
+        'src/scss/fonts.scss',
+        'src/scss/base.scss',
+        'src/scss/typography.scss',
+        'src/scss/layouts.scss',
+        'src/scss/modules.scss',
+        'src/scss/pages.scss'
     ])
     .pipe(plumber())
     .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
@@ -80,7 +80,7 @@ gulp.task('style-prod', function styleDemo() {
 });
 
 gulp.task('style-vendor', function styleVendor() {
-    return gulp.src('__dev/scss/vendor.scss')
+    return gulp.src('src/scss/vendor.scss')
     .pipe(plumber())
     .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
     .pipe(concatCss('vendor.min.css'))
@@ -90,7 +90,7 @@ gulp.task('style-vendor', function styleVendor() {
 });
 
 gulp.task('style-vendor-prod', function styleVendor() {
-    return gulp.src('__dev/scss/vendor.scss')
+    return gulp.src('src/scss/vendor.scss')
     .pipe(plumber())
     .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
     .pipe(concatCss('vendor.min.css'))
@@ -102,9 +102,9 @@ gulp.task('style-vendor-prod', function styleVendor() {
 gulp.task('js-demo', function () {
     return gulp.src([
             'node_modules/jquery/dist/jquery.min.js',
-            '__dev/js/demo.js',
-            '__dev/js/console.js',
-            '__dev/js/common.js'
+            'src/js/demo.js',
+            'src/js/console.js',
+            'src/js/common.js'
         ])
     .pipe(plumber())
     .pipe(babel())
@@ -117,9 +117,9 @@ gulp.task('js-demo', function () {
 gulp.task('js-prod-minify', function () {
     return gulp.src([
             'node_modules/jquery/dist/jquery.min.js',
-            '__dev/js/demo.js',
-            '__dev/js/console.js',
-            '__dev/js/common.js'
+            'src/js/demo.js',
+            'src/js/console.js',
+            'src/js/common.js'
         ])
     .pipe(plumber())
     .pipe(babel())
@@ -141,8 +141,8 @@ gulp.task('js-prod-vendor', function () {
 
 gulp.task('js-prod', function () {
     return gulp.src([
-            '__dev/js/console.js',
-            '__dev/js/common.js'
+            'src/js/console.js',
+            'src/js/common.js'
         ])
     .pipe(plumber())
     .pipe(babel())
@@ -152,12 +152,12 @@ gulp.task('js-prod', function () {
 
 // Copy images ------------------------------------------------------------------------------------
 gulp.task('images-demo', function () {
-    return gulp.src('__dev/images/**/*.*')
+    return gulp.src('src/images/**/*.*')
     .pipe(gulp.dest('demo/images'));
 });
 
 gulp.task('images-prod', function () {
-    return gulp.src('__dev/images/**/*.*')
+    return gulp.src('src/images/**/*.*')
     .pipe(gulp.dest('public/images'));
 });
 
@@ -170,11 +170,11 @@ gulp.task('build', gulp.series('style-prod', 'style-vendor-prod', 'html-prod', '
 gulp.task('default', function Default() {
     livereload.listen();
 
-    gulp.watch('__dev/templates/**/*.pug', gulp.series('html-demo'));
+    gulp.watch('src/templates/**/*.pug', gulp.series('html-demo'));
 
-    gulp.watch('__dev/scss/**/*.scss', gulp.series('style-demo', 'style-vendor'));
+    gulp.watch('src/scss/**/*.scss', gulp.series('style-demo', 'style-vendor'));
 
-    gulp.watch('__dev/js/**/*.js', gulp.series('js-demo'));
+    gulp.watch('src/js/**/*.js', gulp.series('js-demo'));
 
-    gulp.watch('__dev/images/**/*.*', gulp.series('images-demo'));
+    gulp.watch('src/images/**/*.*', gulp.series('images-demo'));
 });
