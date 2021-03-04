@@ -1,23 +1,17 @@
 .hide-on-mobile {
     display: none;
 
-    @media (min-width: $tablet) {
-        display: block;
-        //  display: flex;
-    }
-}
-
-.hide-on-desktop {
-    display: block;
-    //  display: flex;
-
-    @media (min-width: $desktop) {
-        display: none;
+    @media (min-width: $mobile) {
+        display: flex;
     }
 }
 
 .d-block {
     display: block;
+}
+
+.d-inline {
+    display: inline;
 }
 
 .d-inline-block {
@@ -26,4 +20,8 @@
 
 .d-flex {
     display: flex;
+}
+
+.d-inline-flex {
+    display: inline-flex;
 }

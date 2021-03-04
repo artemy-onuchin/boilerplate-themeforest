@@ -1,8 +1,8 @@
 // general rules
 @import './vars';
-@import './theme_rules/colors';
-@import './mixin';
+@import './mixins';
 
 // base rules
+@import './base_rules/base';
 @import './base_rules/special-classes';
 @import './state_rules/display';

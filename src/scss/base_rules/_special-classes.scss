@@ -1,118 +1,25 @@
-// sass-lint:disable no-misspelled-properties
-* {
-    -webkit-tap-highlight-color: transparent;
-    outline: 0;
-}
+// Padding
+.p0 {padding: 0}
+.pt0 {padding-top: 0}
+.pr0 {padding-right: 0}
+.pb0 {padding-bottom: 0}
+.pl0 {padding-left: 0}
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+// Margin
+.m0 {margin: 0}
+.mt0 {margin-top: 0}
+.mr0 {margin-right: 0}
+.mb0 {margin-bottom: 0}
+.ml0 {margin-left: 0}
 
-ul[class],
-ol[class] {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-    margin: 0;
-}
-
-input[placeholder] {text-overflow: ellipsis;}
-input::-moz-placeholder {text-overflow: ellipsis;}
-input:-moz-placeholder {text-overflow: ellipsis;}
-input:-ms-input-placeholder {text-overflow: ellipsis;}
-
-:focus::-webkit-input-placeholder {color: transparent}
-:focus::-moz-placeholder {color: transparent}
-:focus:-moz-placeholder {color: transparent}
-:focus:-ms-input-placeholder {color: transparent}
-
-label {
-    cursor: pointer;
-    user-select: none;
-}
-
-textarea {
-    resize: vertical;
-}
-
-address {
-    font-style: normal;
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-}
-
-.img-responsive {
-    display: inline-block;
-    max-width: 100%;
-    height: auto;
-}
-
-// Text align
+// Text
 .text-left {text-align: left}
 .text-center {text-align: center}
 .text-right {text-align: right}
 
-// Floating
-.float-left {float: left;}
-.float-right {float: right;}
-.float-none {float: none;}
-
-.clearfix::after {
-    display: block;
-    height: 0;
-    clear: both;
-    content: '';
-    visibility: hidden;
-}
-
-.lte8 {
-    .clearfix {
-        overflow: hidden;
-        zoom: 1;
-    }
-}
-
-.clear {clear: both;}
-
-a:not([class]) {
-    text-decoration-skip-ink: auto;
-}
-
-article > * + * {
-    margin-top: 1em;
-}
-
-input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-    }
+// Image responsive
+.img-responsive {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
 }

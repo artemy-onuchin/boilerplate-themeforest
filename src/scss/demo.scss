@@ -2,3 +2,13 @@
     background: #cccccc;
     box-sizing: border-box;
 }
+
+.demo-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+        display: inline-block;
+        margin: 10px;
+    }
+}

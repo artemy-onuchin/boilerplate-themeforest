@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "description": "Boilerplate code for create html theme for marketplace",
   "private": true,
+  "scripts": {
+    "dev": "gulp dev",
+    "start": "gulp dev",
+    "build": "gulp build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artemiyonuchin/boilerplate-themeforest.git"
@@ -12,7 +17,7 @@
     "html",
     "template"
   ],
-  "author": "Onuchin Artemiy",
+  "author": "Artemiy Onuchin",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/artemiyonuchin/boilerplate-themeforest/issues"
@@ -44,6 +49,7 @@
     "> 1%"
   ],
   "dependencies": {
+    "bootstrap": "^5.0.0-beta1",
     "jquery": "^3.5.1"
   }
 }

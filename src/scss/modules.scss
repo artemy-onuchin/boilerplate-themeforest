@@ -1,7 +1,6 @@
 // general rules
 @import './vars';
-@import './theme_rules/colors';
-@import './mixin';
+@import './mixins';
 
 // modules rules
 @import './module_rules/slideshow';

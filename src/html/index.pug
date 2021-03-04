@@ -9,14 +9,24 @@ html
     body
 
         // START HEADER
-        include layouts/header.pug
+        header
+            h1 Boilerplate for themeforest.net
         // END HEADER
         |
         |
         // START DEMO INDEX PAGE
         main
+            h2 Demo pages
+
             //- here list to your demo page
-            p It's a demo page
+            .demo-list
+                a(href="home-01.html") Home page ver. 01
+                a(href="home-02.html") Home page ver. 02
+                a(href="home-03.html") Home page ver. 03
+                a(href="about.html") About page
+                a(href="news.html") News company
+                a(href="service.html") Service
+                a(href="contacts.html") Contacts
         // END DEMO INDEX PAGE
         |
         |

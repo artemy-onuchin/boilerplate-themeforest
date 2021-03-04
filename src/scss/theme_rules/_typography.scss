@@ -1,0 +1,48 @@
+h1 {
+    margin: $size * 4 0 $size; //32 0 8
+    font-size: $size * 6; //48
+    font-weight: 700;
+    line-height: $size * 7; //56
+}
+
+h2 {
+    margin: $size * 4 0 $size; //32 0 8
+    font-size: $size * 5; //40
+    font-weight: 700;
+    line-height: $size * 6; //48
+}
+
+h3 {
+    margin: $size * 3 0 $size; //24 0 8
+    font-size: $size * 4; //32
+    font-weight: 700;
+    line-height: $size * 5; //40
+}
+
+h4 {
+    margin: $size * 3 0 $size; //24 0 8
+    font-size: $size * 3 + 1px; //25
+    font-weight: 700;
+    line-height: $size * 4; //32
+}
+
+h5 {
+    margin: $size * 2 0 $size; //16 0 8
+    font-size: $size * 2 + 4px; //20
+    font-weight: 400;
+    line-height: $size * 4; //32
+}
+
+h6 {
+    margin: $size * 2 0 $size; //16 0 8
+    font-size: $size * 2; //16
+    font-weight: 400;
+    line-height: $size * 3; //24
+}
+
+p {
+    margin: 0 0 $size * 2; //0 0 8
+    font-size: $size * 2; //16
+    font-weight: 400;
+    line-height: $size * 3; //24
+}

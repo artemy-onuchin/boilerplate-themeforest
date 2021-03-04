@@ -1,4 +1,7 @@
-- var pageTitle = 'Welcome to our site!'
+block vars
+    if !vars
+        - var pageTitle = 'Page title'
+
 
 doctype html
 html
@@ -14,9 +17,8 @@ html
         |
         |
         // START HOME PAGE
-        main
-            //- here list to your demo page
-            p It's a HOME №1 page
+        block content
+        a(href="/") Back to demo list
         // END HOME PAGE
         |
         |

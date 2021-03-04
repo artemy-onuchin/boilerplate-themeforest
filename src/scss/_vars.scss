@@ -1,5 +1,20 @@
-// Breakpoints
-$mobile: 768px;
-$tablet: 1024px;
-$notebook: 1366px;
+// breakpoint
+$mobile: 576px;
+$tablet-portrait: 768px;
+$tablet-landscape: 1024px;
+$laptop: 1366px;
 $desktop: 1600px;
+
+// colors
+$color-white: #ffffff;
+$color-black: #000000;
+$color-text: #333333;
+
+// fonts
+$font-family: sans-serif;
+
+// eight pixel idealogy
+$size: 8px;
+
+// other
+$transition: 300ms;

@@ -7,9 +7,11 @@ Boilerplate code for create html theme for marketplace
 
 ## Dependencies
 - [`gulp`](https://gulpjs.com/) - Gulp is a toolkit for automating painful or time-consuming tasks in your development.
-- [`pug`](https://pugjs.org/) - Pug is a high-performance template engine.
-- [`jQuery`](https://jquery.com/) - jQuery is a fast, small, and feature-rich JavaScript library.
 - [`babel`](https://babeljs.io/) - is a JavaScript compiler.
+- [`pug`](https://pugjs.org/) - Pug is a high-performance template engine.
+- [`sass/scss`](https://sass-lang.com/) - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
+- [`jQuery`](https://jquery.com/) - jQuery is a fast, small, and feature-rich JavaScript library.
+- [`Bootstrap`](https://getbootstrap.com/) - The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.
 
 ### Author
 Onuchin Artemy
