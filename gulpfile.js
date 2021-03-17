@@ -87,9 +87,15 @@ gulp.task('scripts', function () {
 
 
 // images -----------------------------------------------------------------------------------------
-gulp.task('images', function () {
+gulp.task('images-dev', function () {
     return gulp.src('src/images/**/*.*')
     .pipe(gulp.dest('demo/images'));
+});
+
+// fonts ------------------------------------------------------------------------------------------
+gulp.task('fonts-dev', function () {
+    return gulp.src('src/fonts/**/*.*')
+    .pipe(gulp.dest('demo/assets/fonts'));
 });
 
 
@@ -99,7 +105,7 @@ gulp.task('watcher', function Watcher() {
     gulp.watch('src/html/**/*.pug', gulp.series('pug'));
     gulp.watch('src/scss/**/*.scss', gulp.series('scss', 'scss-vendor'));
     gulp.watch('src/js/**/*.js', gulp.series('scripts'));
-    gulp.watch('src/images/**/*.*', gulp.series('images'));
+    gulp.watch('src/images/**/*.*', gulp.series('images-dev'));
 });
 
 // PRODUCTION #####################################################################################
@@ -197,6 +203,32 @@ gulp.task('images-prod', function () {
     .pipe(gulp.dest('public/images'));
 });
 
+// fonts ------------------------------------------------------------------------------------------
+gulp.task('fonts-prod', function () {
+    return gulp.src('src/fonts/**/*.*')
+    .pipe(gulp.dest('public/assets/fonts'));
+});
+
 // COMMANDS #######################################################################################
-gulp.task('dev', gulp.series('folder-dev', 'pug', 'scss', 'scss-vendor', 'scripts', 'images', 'watcher'));
-gulp.task('build', gulp.series('folder-prod', 'pug-prod', 'scss-prod', 'scss-vendor-prod', 'js-prod-minify', 'js-prod-vendor', 'js-prod', 'images-prod',));
+gulp.task('dev', gulp.series(
+    'folder-dev',
+    'pug',
+    'scss',
+    'scss-vendor',
+    'scripts',
+    'images-dev',
+    'fonts-dev',
+    'watcher'
+));
+
+gulp.task('build', gulp.series(
+    'folder-prod',
+    'pug-prod',
+    'scss-prod',
+    'scss-vendor-prod',
+    'js-prod-minify',
+    'js-prod-vendor',
+    'js-prod',
+    'fonts-prod',
+    'images-prod'
+));
