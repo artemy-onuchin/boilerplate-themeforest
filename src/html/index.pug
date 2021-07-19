@@ -1,39 +1,14 @@
-- var pageTitle = 'Demo page'
+extends templates/demo.pug
 
-doctype html
-html
+block vars
+    - var pageTitle = 'Demo page'
 
-    include blocks/head-demo.pug
-    include blocks/mixins.pug
-
-    body
-
-        // START HEADER
-        header
-            h1 Boilerplate for themeforest.net
-        // END HEADER
-        |
-        |
-        // START DEMO INDEX PAGE
-        main
-            h2 Demo pages
-
-            //- here list to your demo page
-            .demo-list
-                a(href="home-01.html") Home page ver. 01
-                a(href="home-02.html") Home page ver. 02
-                a(href="home-03.html") Home page ver. 03
-                a(href="about.html") About page
-                a(href="news.html") News company
-                a(href="service.html") Service
-                a(href="contacts.html") Contacts
-        // END DEMO INDEX PAGE
-        |
-        |
-        // START FOOTER
-        include layouts/footer.pug
-        // END FOOTER
-        |
-        |
-        // JS
-        include blocks/scripts-demo.pug
+block content
+    h2 Demo pages
+    nav.menu-main
+        a(href="/home-01.html") Home page ver. 01
+        a(href="/home-02.html") Home page ver. 02
+        a(href="/about.html") About
+        a(href="/contacts.html") Contacts
+        a(href="/news.html") News
+        a(href="/service.html") Service

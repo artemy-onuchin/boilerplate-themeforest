@@ -1,24 +1,17 @@
-extends ../templates/default.pug
+extends ../templates/base.pug
 
-append vars
+block head
+    include ../common/head-demo.pug
+
+block vars
     - var pageTitle = 'News page'
 
-append content
-    main
-        h1 Company news
-        ul
-            li
-                h3 Lorem ipsum dolor sit!
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nisi labore architecto repellendus ab quo molestias maxime perferendis id, soluta error dolor inventore voluptatem suscipit debitis sed! Provident, voluptas harum.
-            li
-                h3 Lorem ipsum dolor sit!
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nisi labore architecto repellendus ab quo molestias maxime perferendis id, soluta error dolor inventore voluptatem suscipit debitis sed! Provident, voluptas harum.
-            li
-                h3 Lorem ipsum dolor sit!
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nisi labore architecto repellendus ab quo molestias maxime perferendis id, soluta error dolor inventore voluptatem suscipit debitis sed! Provident, voluptas harum.
-            li
-                h3 Lorem ipsum dolor sit!
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nisi labore architecto repellendus ab quo molestias maxime perferendis id, soluta error dolor inventore voluptatem suscipit debitis sed! Provident, voluptas harum.
-            li
-                h3 Lorem ipsum dolor sit!
-                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores nisi labore architecto repellendus ab quo molestias maxime perferendis id, soluta error dolor inventore voluptatem suscipit debitis sed! Provident, voluptas harum.
+block content
+    h1 Company news
+    ul
+        +newsItem('Lorem ipsum doler!')
+        +newsItem('Consectetur adipisicing elit.')
+        +newsItem('Dolor consequuntur?')
+        +newsItem('Qui excepturi dolorem.')
+        +newsItem('Dolore autem pariatur.')
+        +newsItem('Itaque laborum?')

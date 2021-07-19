@@ -1,0 +1,10 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2021
+    },
+    "env": {
+        "es12": true,
+        "browser": true,
+        "node": true
+    }
+}

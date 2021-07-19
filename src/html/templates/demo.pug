@@ -1,0 +1,16 @@
+block vars
+    if !vars
+        - var pageTitle = 'Base'
+
+doctype html
+html(lang="en")
+    head
+        block head
+            if !head
+                include ../common/head-demo.pug
+        include ../common/mixins.pug
+
+    body
+
+        block content
+

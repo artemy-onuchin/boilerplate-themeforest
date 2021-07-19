@@ -1,1 +1,11 @@
 extends ../templates/alternative.pug
+
+block head
+    include ../common/head-demo.pug
+
+block vars
+    - var pageTitle = 'Home page version 2'
+
+block content
+    h1 Home page version 02
+    p  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis repellendus provident autem impedit numquam, non maxime, enim porro soluta iusto perferendis repellat minima nulla ipsum alias obcaecati officia voluptate incidunt.

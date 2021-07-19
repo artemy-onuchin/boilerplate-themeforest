@@ -1,6 +1,6 @@
 block vars
     if !vars
-        - var pageTitle = 'Alternative'
+        - var pageTitle = 'Base'
 
 doctype html
 html(lang="en")
@@ -17,14 +17,8 @@ html(lang="en")
             include ../layouts/header.pug
             // HEADER END
 
-            main.row
-                .col-12.col-md-8
-                    block content
-
-                // ASIDE START
-                .col-12.col-md-4
-                    include ../layouts/aside.pug
-                // ASIDE END
+            main
+                block content
 
             // FOOTER START
             include ../layouts/footer.pug

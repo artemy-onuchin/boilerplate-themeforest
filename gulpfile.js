@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 // Plugins
 let gulp = require('gulp'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     autoprefixer = require('gulp-autoprefixer'),
     concatCss = require('gulp-concat-css'),
     gcmq = require('gulp-group-css-media-queries'),
@@ -13,222 +13,205 @@ let gulp = require('gulp'),
     babel = require('gulp-babel'),
     plumber = require('gulp-plumber'),
     replace = require('gulp-replace'),
-    livereload = require('gulp-livereload');
+    del = require('del'),
+    sync = require('browser-sync')
 
+// ##################################################################################################################################
+// DEVELOPMENT MODE BELOW ###########################################################################################################
+// ##################################################################################################################################
 
-// DEV ############################################################################################
-// create folder ----------------------------------------------------------------------------------
-gulp.task('folder-dev', function Watcher() {
-    return gulp.src('src/')
-    .pipe(gulp.dest('demo'))
+// Cleaning demo folder -------------------------------------------------------------------------------------------------------------
+gulp.task('cleaning-dev', function CleaningDevFolder() {
+    return del('demo')
 })
 
+// Create folder --------------------------------------------------------------------------------------------------------------------
+gulp.task('create-dev-folder', function CreateDevFolder() {
+    return gulp.src('src/')
+        .pipe(gulp.dest('demo'))
+})
 
-// template ---------------------------------------------------------------------------------------
-gulp.task('pug', function Template() {
+// Local server ---------------------------------------------------------------------------------------------------------------------
+gulp.task('serve', function LocalServer() {
+    sync.init({
+        server: {
+            baseDir: './demo',
+        },
+        open: false,
+        notify: false
+    })
+
+    gulp.watch('src/html/**/*.pug', gulp.series('pug-dev')).on('change', sync.reload)
+    gulp.watch('src/scss/**/*.scss', gulp.series('sass-dev', 'sass-vendor-dev')).on('change', sync.reload)
+    gulp.watch('src/images/**/*.*', gulp.series('images-dev')).on('change', sync.reload)
+})
+
+// Template -------------------------------------------------------------------------------------------------------------------------
+gulp.task('pug-dev', function TemplateDev() {
     return gulp.src([
         'src/html/index.pug',
         'src/html/pages/*.pug'
     ])
-    .pipe(plumber())
-    .pipe(pug())
-    .pipe(gulp.dest('demo/'))
-    .pipe(livereload({ start: true }));
+        .pipe(plumber())
+        .pipe(pug({}))
+        .pipe(gulp.dest('demo/'))
 })
 
-
-// style ------------------------------------------------------------------------------------------
-gulp.task('scss', function styleDemo() {
+// Styles ---------------------------------------------------------------------------------------------------------------------------
+gulp.task('sass-dev', function StyleDev() {
     return gulp.src([
         'src/scss/normalize.scss',
         'src/scss/base.scss',
+        'src/scss/fonts.scss',
         'src/scss/theme.scss',
         'src/scss/layouts.scss',
-        'src/scss/modules.scss',
+        'src/scss/components.scss',
         'src/scss/pages.scss',
         'src/scss/demo.scss'
     ])
-    .pipe(plumber())
-    .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
-    .pipe(concatCss('demo.min.css'))
-    .pipe(autoprefixer())
-    .pipe(gcmq())
-    .pipe(cleanCSS())
-    .pipe(gulp.dest('demo/assets/css'))
-    .pipe(livereload({ start: true }));
-});
-
-gulp.task('scss-vendor', function styleVendor() {
-    return gulp.src('src/scss/vendor.scss')
-    .pipe(plumber())
-    .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
-    .pipe(concatCss('vendor.min.css'))
-    .pipe(cleanCSS())
-    .pipe(gulp.dest('demo/assets/css'))
-    .pipe(livereload({ start: true }));
-});
-
-
-// javascript -------------------------------------------------------------------------------------
-gulp.task('scripts', function () {
-    return gulp.src([
-            'node_modules/jquery/dist/jquery.min.js',
-            'src/js/demo.js',
-            'src/js/console.js',
-            'src/js/common.js'
-        ])
-    .pipe(plumber())
-    .pipe(babel())
-    .pipe(concat('demo.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('demo/assets/js'))
-    .pipe(livereload({ start: true }));
-});
-
-
-// images -----------------------------------------------------------------------------------------
-gulp.task('images-dev', function () {
-    return gulp.src('src/images/**/*.*')
-    .pipe(gulp.dest('demo/images'));
-});
-
-// fonts ------------------------------------------------------------------------------------------
-gulp.task('fonts-dev', function () {
-    return gulp.src('src/fonts/**/*.*')
-    .pipe(gulp.dest('demo/assets/fonts'));
-});
-
-
-// watcher ----------------------------------------------------------------------------------------
-gulp.task('watcher', function Watcher() {
-    livereload.listen();
-    gulp.watch('src/html/**/*.pug', gulp.series('pug'));
-    gulp.watch('src/scss/**/*.scss', gulp.series('scss', 'scss-vendor'));
-    gulp.watch('src/js/**/*.js', gulp.series('scripts'));
-    gulp.watch('src/images/**/*.*', gulp.series('images-dev'));
-});
-
-// PRODUCTION #####################################################################################
-// create folder ----------------------------------------------------------------------------------
-gulp.task('folder-prod', function Watcher() {
-    return gulp.src('src/')
-    .pipe(gulp.dest('public'))
+        .pipe(plumber())
+        .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
+        .pipe(concatCss('demo.min.css'))
+        .pipe(autoprefixer())
+        .pipe(gcmq())
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('demo/assets/css'))
 })
 
+gulp.task('sass-vendor-dev', function StyleVendorDev() {
+    return gulp.src('src/scss/vendor.scss')
+        .pipe(plumber())
+        .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
+        .pipe(concatCss('vendor.min.css'))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('demo/assets/css'))
+})
 
-// template ---------------------------------------------------------------------------------------
-gulp.task('pug-prod', function buildHTML() {
+// JavaScripts ----------------------------------------------------------------------------------------------------------------------
+gulp.task('scripts-dev', function ScriptsDev() {
+    return gulp.src([
+        'node_modules/jquery/dist/jquery.min.js',
+        'src/js/demo.js',
+        'src/js/console.js',
+    ])
+        .pipe(plumber())
+        .pipe(babel())
+        .pipe(concat('demo.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('demo/assets/js'))
+})
+
+// Fonts ----------------------------------------------------------------------------------------------------------------------------
+gulp.task('fonts-dev', function () {
+    return gulp.src('src/fonts/**/*.*')
+        .pipe(gulp.dest('demo/assets/fonts'))
+})
+
+// Images ---------------------------------------------------------------------------------------------------------------------------
+gulp.task('images-dev', function () {
+    return gulp.src('src/images/**/*.*')
+        .pipe(gulp.dest('demo/images'))
+})
+
+// ##################################################################################################################################
+// PRODUCTION MODE BELOW ############################################################################################################
+// ##################################################################################################################################
+
+// Create folder --------------------------------------------------------------------------------------------------------------------
+gulp.task('create-prod-folder', function CreateDevFolder() {
+    return gulp.src('src/')
+        .pipe(gulp.dest('product'))
+})
+
+// Template -------------------------------------------------------------------------------------------------------------------------
+gulp.task('pug-product', function TemplateDev() {
     return gulp.src([
         'src/html/index.pug',
         'src/html/pages/*.pug'
     ])
-    .pipe(plumber())
-    .pipe(replace('include ../blocks/head-demo.pug','include ../blocks/head-prod.pug'))
-    .pipe(replace('include ../blocks/scripts-demo.pug','include ../blocks/scripts-prod.pug'))
-    .pipe(pug({
-        pretty: '    '
-    }))
-    .pipe(gulp.dest('public/'))
-});
+        .pipe(plumber())
+        .pipe(replace('include ../common/head-demo.pug','include ../common/head-prod.pug'))
+        .pipe(replace('include ../common/scripts-demo.pug','include ../common/scripts-prod.pug'))
+        .pipe(pug({
+            pretty: '    '
+        }))
+        .pipe(gulp.dest('product/'))
+})
 
-
-// style ------------------------------------------------------------------------------------------
-gulp.task('scss-prod', function styleDemo() {
+// Styles ---------------------------------------------------------------------------------------------------------------------------
+gulp.task('sass-prod', function StyleDev() {
     return gulp.src([
         'src/scss/normalize.scss',
-        'src/scss/fonts.scss',
         'src/scss/base.scss',
-        'src/scss/typography.scss',
+        'src/scss/fonts.scss',
+        'src/scss/theme.scss',
         'src/scss/layouts.scss',
-        'src/scss/modules.scss',
+        'src/scss/components.scss',
         'src/scss/pages.scss',
         'src/scss/demo.scss'
     ])
-    .pipe(plumber())
-    .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(gcmq())
-    .pipe(gulp.dest('public/assets/css'));
-});
+        .pipe(plumber())
+        .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gcmq())
+        .pipe(gulp.dest('product/assets/css'))
+})
 
-gulp.task('scss-vendor-prod', function styleVendor() {
+gulp.task('sass-vendor-prod', function StyleVendorDev() {
     return gulp.src('src/scss/vendor.scss')
-    .pipe(plumber())
-    .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
-    .pipe(concatCss('vendor.min.css'))
-    .pipe(cleanCSS())
-    .pipe(gulp.dest('public/assets/css'));
-});
+        .pipe(plumber())
+        .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
+        .pipe(concatCss('vendor.min.css'))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('product/assets/css'))
+})
 
-
-// javascript -------------------------------------------------------------------------------------
-gulp.task('js-prod-minify', function () {
+// JavaScripts ----------------------------------------------------------------------------------------------------------------------
+gulp.task('scripts-prod', function ScriptsDev() {
     return gulp.src([
-            'node_modules/jquery/dist/jquery.min.js',
-            'src/js/demo.js',
-            'src/js/console.js',
-            'src/js/common.js'
-        ])
-    .pipe(plumber())
-    .pipe(babel())
-    .pipe(concat('script.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('public/assets/js'))
-});
+        'node_modules/jquery/dist/jquery.min.js',
+        'src/js/demo.js',
+        'src/js/console.js',
+    ])
+        .pipe(plumber())
+        .pipe(babel())
+        .pipe(gulp.dest('product/assets/js'))
+})
 
-gulp.task('js-prod-vendor', function () {
-    return gulp.src([
-            'node_modules/jquery/dist/jquery.min.js',
-        ])
-    .pipe(plumber())
-    .pipe(babel())
-    .pipe(concat('vendor.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('public/assets/js'))
-});
-
-gulp.task('js-prod', function () {
-    return gulp.src([
-            'src/js/console.js',
-            'src/js/common.js'
-        ])
-    .pipe(plumber())
-    .pipe(babel())
-    .pipe(gulp.dest('public/assets/js'))
-});
-
-// images -----------------------------------------------------------------------------------------
-gulp.task('images-prod', function () {
-    return gulp.src('src/images/**/*.*')
-    .pipe(gulp.dest('public/images'));
-});
-
-// fonts ------------------------------------------------------------------------------------------
+// Fonts ----------------------------------------------------------------------------------------------------------------------------
 gulp.task('fonts-prod', function () {
     return gulp.src('src/fonts/**/*.*')
-    .pipe(gulp.dest('public/assets/fonts'));
-});
+        .pipe(gulp.dest('product/assets/fonts'))
+})
 
-// COMMANDS #######################################################################################
+// Images ---------------------------------------------------------------------------------------------------------------------------
+gulp.task('images-prod', function () {
+    return gulp.src('src/images/**/*.*')
+        .pipe(gulp.dest('product/images'))
+})
+
+
+// ##################################################################################################################################
+// GULP COMMANDS BELOW ##############################################################################################################
+// ##################################################################################################################################
 gulp.task('dev', gulp.series(
-    'folder-dev',
-    'pug',
-    'scss',
-    'scss-vendor',
-    'scripts',
-    'images-dev',
+    'cleaning-dev',
+    'create-dev-folder',
+    'pug-dev',
+    'sass-vendor-dev',
+    'sass-dev',
+    'scripts-dev',
     'fonts-dev',
-    'watcher'
-));
+    'images-dev',
+    'serve'
+))
 
 gulp.task('build', gulp.series(
-    'folder-prod',
-    'pug-prod',
-    'scss-prod',
-    'scss-vendor-prod',
-    'js-prod-minify',
-    'js-prod-vendor',
-    'js-prod',
+    'create-prod-folder',
     'fonts-prod',
-    'images-prod'
-));
+    'images-prod',
+    'sass-prod',
+    'sass-vendor-prod',
+    'pug-product',
+    'scripts-prod'
+))

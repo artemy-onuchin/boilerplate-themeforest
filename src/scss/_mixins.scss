@@ -1,4 +1,4 @@
 // mixins
-@mixin name($var-a, $var-b) {
-    border: 1px $var-a $var-b;
+@mixin border($type, $color) {
+    border: 1px $type $color;
 }
